@@ -1,15 +1,14 @@
 #python REFINED.py data/normalized_padel_feats_NCI60_672_small.csv res 1 0 10
 from sys import argv
-# [name, dataset_path, saving_path, iters_count, first, last]
+# [name, dataset_path, saving_path, iters_count]
 
-if len(argv) < 6:
-    print("Not enought args\nPlease input: dataset path, saving path, count of hill climb iterations, first index, last index")
+if len(argv) < 4:
+    print("Not enought args\nPlease input: dataset path, saving path, count of hill climb iterations")
     exit()
 
-dataset_filename, path, iters_count, first, last = argv[1:]
+dataset_filename, path, iters_count = argv[1:]
 iters_count = int(iters_count)
-first = int(first)
-last = int(last)
+
 
 import numpy as np
 import pandas as pd
@@ -25,8 +24,7 @@ from Toolbox import REFINED_Im_Gen
 
 
 Feat_DF = pd.read_csv(dataset_filename)     #"data/normalized_padel_feats_NCI60_672_small.csv"
-X = Feat_DF.values
-X = X[first:last+1]
+X = Feat_DF.values                          
 original_input = pd.DataFrame(data = X)
 
 feature_names_list = Feat_DF.columns.tolist()
@@ -63,7 +61,7 @@ for iter_num in range(iters_count):
         # print(swap_dict)
         map_in_int = paraHill.execute_dict_swap(swap_dict, map_in_int)
 
-        # print(">",init_coord,"Corr:",paraHill.universial_corr(Dist,map_in_int))
+        print(">",init_coord,"Corr:",paraHill.universial_corr(Dist,map_in_int))
 
 
 coords = np.array([[item[0] for item in np.where(map_in_int == ii)] for ii in range(Nn)])

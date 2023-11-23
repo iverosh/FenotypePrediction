@@ -158,7 +158,7 @@ def Assign_features_to_pixels(xy,nn,verbose = False):
         ft = 'F' + str(result_table[each_pixel,2])
         img[xx,yy] = ft
     return img.astype(object)
-
+# print(">>>> MDS")
 #eq_xy = two_d_eq(mds_xy)
 #Img = Assign_features_to_pixels(eq_xy,nn,verbose=1)
 #Init_Corr_MDS = InitCorr(dist_mat,Img,nn)
