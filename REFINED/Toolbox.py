@@ -16,6 +16,11 @@ from sklearn.linear_model import LinearRegression
 
 
 
+def normalize(arr):
+    for x in arr:
+        normalized = (x - x.min()) / (x.max() - x.min())
+        x[:] = normalized[:]
+           
 
 #%% NRMSE
 def NRMSE(Y_Target, Y_Predict):
