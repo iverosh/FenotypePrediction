@@ -17,11 +17,6 @@ def IncrementalEucDist(n, filename): # сделать с меммап
     return Euc_Dist
 
 
-def EucDistMemmap(n, m, filename):
-    mmapped_array = np.memmap(filename, mode = "r", shape=(n, m), dtype='float64')
-    Euc_Dist = euclidean_distances(mmapped_array)
-    print(Euc_Dist)
-    
+mmapped_array = np.memmap("memmapped.dat", mode = "r", shape=(100, 19), dtype='float64')
+Euc_Dist = euclidean_distances(mmapped_array)
 
-
-EucDistMemmap(100, 19, 'memmapped.dat')
