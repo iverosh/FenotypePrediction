@@ -51,10 +51,10 @@ def evaluate_swap(coord1,coord2,dist_matr,mapping_in_int,original_corr = -2):
         the_map[coord1[0],coord1[1]] = the_map[coord2[0],coord2[1]]
         the_map[coord2[0],coord2[1]] = temp
         changed_corr = universial_corr(dist_matr,the_map)
-        return(changed_corr - original_corr)
+        # print(changed_corr, original_corr)
+        return(changed_corr - original_corr)[0]
     except IndexError:
         raise Warning ("Swap index:", coord1,coord2,"Index error. Check the coordnation.")
-        return np.nan
     
 def evaluate_centroid(centroid,dist_matr,mapping_in_int):
     original_corr = universial_corr(dist_matr,mapping_in_int)
@@ -64,7 +64,9 @@ def evaluate_centroid(centroid,dist_matr,mapping_in_int):
         # directions are returned as tuple (-1,1), (-1,0), (-1,1), (0,0), ....
         swap_coord = [centroid[0]+each_direc[0],centroid[1]+each_direc[1]]
         evaluation = evaluate_swap(centroid,swap_coord,dist_matr,mapping_in_int,original_corr)
+        # print(evaluation)
         results.append(evaluation)
+    # print(results)    
     results_array = np.array(results)
     #best_swap_direc = np.where(results_array == np.nanmax(results_array))[0][0]
     best_swap_direc = np.where(results_array == np.nanmin(results_array))[0][0]
@@ -87,10 +89,8 @@ def execute_coordination_swap(coord1,coord2,mapping_in_int):
     # If out of bound, return NaN. 
     if coord1[0]<0 or coord1[1]<0 or coord2[0]<0 or coord2[1]<0:
         raise Warning("Swapping failed:",coord1,coord2,"-- Negative coordnation.")
-        return the_map
     if coord1[0]>the_map.shape[0] or coord1[1]>the_map.shape[0] or coord2[0]>the_map.shape[0] or coord2[1]>the_map.shape[0]:
         raise Warning("Swapping failed:",coord1,coord2,"-- Coordnation out of bound.")
-        return the_map
 
     temp = the_map[coord1[0],coord1[1]] 
     the_map[coord1[0],coord1[1]] = the_map[coord2[0],coord2[1]]
@@ -109,6 +109,7 @@ def execute_direction_swap(centroid,mapping_in_int,direction = 5):
     coord1 = list(centroid)
     coord2 = list(centroid)
     if direction not in range(1,10):
+        print(direction)
         raise ValueError("Invalid swapping direction.")
     if direction == 5:
         return mapping_in_int

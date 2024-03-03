@@ -7,11 +7,11 @@ Created on Mon Oct  7 18:41:14 2019
 
 import numpy as np
 import pandas as pd
-import os
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from fancyimpute import KNN
-from scipy.stats import pearsonr
+# import os
+# import matplotlib.pyplot as plt
+# from sklearn.model_selection import train_test_split
+# from fancyimpute import KNN
+# from scipy.stats import pearsonr
 from sklearn.linear_model import LinearRegression
 
 

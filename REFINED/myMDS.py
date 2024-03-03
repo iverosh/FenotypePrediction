@@ -9,6 +9,8 @@ def myMDS(dist, m = 2):
     indexes = np.argsort(eigenvalues)[-m:]
     eigenvalues = np.array([eigenvalues[index] for index in indexes])
     eigenvectors = np.array([eigenvectors[index] for index in indexes])
+    eigenvalues = np.real(eigenvalues)
+    eigenvectors = np.real(eigenvectors)
     return np.dot(eigenvectors.T, np.diag(eigenvalues ** 0.5))
 
 
